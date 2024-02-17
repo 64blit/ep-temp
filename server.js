@@ -1,6 +1,7 @@
 import Fastify from 'fastify';
 import FastifyVite from '@fastify/vite';
 import { EyePopSdk } from "@eyepop.ai/eyepop";
+import process from 'process';
 
 const POP_UUID = process.env.EYEPOP_POP_ID || '';
 const POP_API_SECRET = process.env.EYEPOP_SECRET_KEY || '';
@@ -48,7 +49,7 @@ server.get('/eyepop/session', async (req, reply) =>
     } catch (error)
     {
         console.error('Error:', error);
-        reply.send(error);
+        reply.send({ error });
     }
 });
 
