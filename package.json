@@ -12,8 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@eyepop.ai/eyepop": ">=0.16.2",
-    "@eyepop.ai/eyepop-render-2d": "^0.16.2",
+    "@eyepop.ai/eyepop": "latest",
+    "@eyepop.ai/eyepop-render-2d": "latest",
     "@react-three/drei": "latest",
     "@react-three/fiber": "latest",
     "@react-three/flex": "latest",
