@@ -12,7 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@eyepop.ai/eyepop": "latest",
+    "@eyepop.ai/eyepop": ">=0.16.2",
+    "@eyepop.ai/eyepop-render-2d": "^0.16.2",
     "@react-three/drei": "latest",
     "@react-three/fiber": "latest",
     "@react-three/flex": "latest",
@@ -33,6 +34,7 @@
     "fastify": "latest",
     "postcss": "latest",
     "tailwindcss": "latest",
-    "vite": "^5.1.2"
+    "vite": "^5.1.2",
+    "vite-plugin-node-polyfills": "^0.21.0"
   }
 }
