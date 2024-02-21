@@ -1,6 +1,6 @@
 import Fastify from 'fastify';
 import FastifyVite from '@fastify/vite';
-import { EyePopSdk } from "@eyepop.ai/eyepop";
+import { EyePop } from "@eyepop.ai/eyepop";
 import process from 'process';
 
 const POP_UUID = process.env.EYEPOP_POP_ID || '';
@@ -32,7 +32,7 @@ server.get('/eyepop/session', async (req, reply) =>
     try
     {
 
-        const endpoint = await EyePopSdk.endpoint(
+        const endpoint = await EyePop.endpoint(
             {
                 popId: POP_UUID,
                 auth: { secretKey: POP_API_SECRET }
