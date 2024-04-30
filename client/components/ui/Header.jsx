@@ -4,9 +4,33 @@ import HeaderPopControls from './HeaderPopControls';
 const Header = ({ className, loading, popNameRef, handleWebcamChange, startButtonRef, onStart }) =>
 {
 
+    const headerRef = React.useRef();
+    const [ headerVisible, setHeaderVisible ] = React.useState(true);
+
+    // on escape key press, hide the header or show it
+    React.useEffect(() =>
+    {
+        const handleKeyPress = (e) =>
+        {
+            if (e.key === 'Escape')
+            {
+                setHeaderVisible(!headerVisible);
+            }
+        }
+
+        document.addEventListener('keydown', handleKeyPress);
+
+        return () =>
+        {
+            document.removeEventListener('keydown', handleKeyPress);
+        }
+    }, [ headerVisible ]);
+
+
+
     return (
         <header
-            className={className}>
+            className={`${className} duration-500 transition-all translate-x-0 ${headerVisible ? 'translate-y-0' : 'translate-y-[-10rem]'} max-w-[50rem]`}>
 
             <div
                 className="bg-blue-200 flex h-20 justify-between items-center m-4 rounded-3xl shadow-2xl">
@@ -23,7 +47,7 @@ const Header = ({ className, loading, popNameRef, handleWebcamChange, startButto
 
                 <h4
                     className="font-bold m-5 overflow-hidden self-center text-xl text-center">
-                    Node Demo
+                    Settings
                 </h4>
 
                 <form action="https://docs.eyepop.ai" target="_blank"

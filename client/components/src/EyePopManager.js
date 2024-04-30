@@ -113,8 +113,8 @@ export default class EyePopManager
             Render2d.renderBox(true),
             Render2d.renderFace(),
             Render2d.renderHand(),
-            Render2d.renderTrail(1.0,
-                '$..keyPoints[?(@.category=="3d-body-points")].points[?(@.classLabel.includes("nose"))]')
+            Render2d.renderPose(),
+            Render2d.renderKeypoints(),
         ]);
 
         this.setLoading(false);
@@ -207,28 +207,12 @@ export default class EyePopManager
         }
     }
 
-
-    // drawPrediction(result)
-    // {
-    //     if (!this.context) return;
-    //     if (!result) return;
-
-    //     this.resultCanvasRef.width = result.source_width;
-    //     this.resultCanvasRef.height = result.source_height;
-    //     this.context.clearRect(0, 0, this.resultCanvasRef.width, this.resultCanvasRef.height);
-    //     this.popPlotter.draw(result);
-    // }
-
-
-
     drawPrediction(result)
     {
         if (!this.context) return;
         if (!result) return;
 
         const { source_width, source_height } = result;
-        // const parentWidth = this.resultCanvasRef.parentElement.clientWidth;
-        // const parentHeight = this.resultCanvasRef.parentElement.clientHeight;
         const parentWidth = window.innerWidth;
         const parentHeight = window.innerHeight;
 
@@ -256,6 +240,7 @@ export default class EyePopManager
             }
         })
     }
+
     getClosestPrediction(time)
     {
         if (this.predictionData.length === 0) return;

@@ -4,6 +4,7 @@ import Header from './ui/Header.jsx';
 import EyePopVisuals from './ui/EyePopVisuals.jsx';
 import EyePopManager from './src/EyePopManager.js';
 import LoadingScreen from './ui/LoadingScreen.jsx';
+import Logos from './ui/Logos.jsx';
 
 export function AutoVideoClipper()
 {
@@ -64,6 +65,8 @@ export function AutoVideoClipper()
                 startButtonRef={startButtonRef}
                 onStart={toggleStart}
             />
+
+            <Logos />
 
         </div>
 
