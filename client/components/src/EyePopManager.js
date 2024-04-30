@@ -110,11 +110,11 @@ export default class EyePopManager
 
         this.context = this.resultCanvasRef.getContext("2d");
         this.popPlotter = Render2d.renderer(this.context, [
-          Render2d.renderBox(true),
-          Render2d.renderFace(),
-          Render2d.renderHand(),
-          Render2d.renderTrail(1.0,
-            '$..keyPoints[?(@.category=="3d-body-points")].points[?(@.classLabel.includes("nose"))]')
+            Render2d.renderBox(true),
+            Render2d.renderFace(),
+            Render2d.renderHand(),
+            Render2d.renderTrail(1.0,
+                '$..keyPoints[?(@.category=="3d-body-points")].points[?(@.classLabel.includes("nose"))]')
         ]);
 
         this.setLoading(false);
@@ -194,9 +194,10 @@ export default class EyePopManager
         try
         {
             scope.popLiveIngress = await scope.endpoint.liveIngress(scope.webcam.stream);
-            scope.endpoint.process({ingressId: scope.popLiveIngress.ingressId()}).then(async (results) => {
-                for await (let result of results) {
-                    console.log(result);
+            scope.endpoint.process({ ingressId: scope.popLiveIngress.ingressId() }).then(async (results) =>
+            {
+                for await (let result of results)
+                {
                     this.drawPrediction(result);
                 }
             });
@@ -207,16 +208,43 @@ export default class EyePopManager
     }
 
 
+    // drawPrediction(result)
+    // {
+    //     if (!this.context) return;
+    //     if (!result) return;
+
+    //     this.resultCanvasRef.width = result.source_width;
+    //     this.resultCanvasRef.height = result.source_height;
+    //     this.context.clearRect(0, 0, this.resultCanvasRef.width, this.resultCanvasRef.height);
+    //     this.popPlotter.draw(result);
+    // }
+
+
+
     drawPrediction(result)
     {
         if (!this.context) return;
         if (!result) return;
 
-        this.resultCanvasRef.width = result.source_width;
-        this.resultCanvasRef.height = result.source_height;
-        this.context.clearRect(0, 0, this.resultCanvasRef.width, this.resultCanvasRef.height);
+        const { source_width, source_height } = result;
+        // const parentWidth = this.resultCanvasRef.parentElement.clientWidth;
+        // const parentHeight = this.resultCanvasRef.parentElement.clientHeight;
+        const parentWidth = window.innerWidth;
+        const parentHeight = window.innerHeight;
+
+        const scaleFactor = Math.min(parentWidth / source_width, parentHeight / source_height);
+        const scaledWidth = source_width * scaleFactor;
+        const scaledHeight = source_height * scaleFactor;
+
+        this.resultCanvasRef.width = scaledWidth;
+        this.resultCanvasRef.height = scaledHeight;
+
+        this.context.clearRect(0, 0, scaledWidth, scaledHeight);
+        this.context.drawImage(this.videoRef, 0, 0, scaledWidth, scaledHeight);
+
         this.popPlotter.draw(result);
     }
+
 
     startLiveInference(ingressId)
     {

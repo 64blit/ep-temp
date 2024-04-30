@@ -25,34 +25,6 @@ const EyePopVisuals = ({ className, resultCanvasRef, videoRef }) =>
         <div
             className={`${className} w-full h-full`} >
 
-            {/* <Canvas
-                className={`${sharedClass}`}
-            >
-                <CameraControls ref={cameraRef} />
-                <ambientLight />
-                <pointLight position={[ 10, 10, 10 ]} />
-
-
-                <Flex justifyContent="center" alignItems="center">
-
-                    <Box centerAnchor>
-                        <mesh>
-                            <boxGeometry args={[ 1, 1, 1 ]} />
-                            <meshStandardMaterial color="blue" />
-                        </mesh>
-                    </Box>
-
-                    <Box centerAnchor flexGrow={1}>
-                        <mesh>
-                            <boxGeometry args={[ 1, 1, 1 ]} />
-                            <meshStandardMaterial color="blue" />
-                        </mesh>
-                    </Box>
-
-                </Flex>
-
-            </Canvas> */}
-
             <canvas
                 id="result-overlay"
                 ref={resultCanvasRef}
@@ -61,7 +33,7 @@ const EyePopVisuals = ({ className, resultCanvasRef, videoRef }) =>
 
             <video
                 ref={videoRef}
-                className={`${sharedClass}`}
+                className={`${sharedClass} hidden`}
                 autoPlay
                 playsInline
                 muted
