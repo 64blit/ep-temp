@@ -20,6 +20,31 @@ const EyePopVisuals = ({ className, resultCanvasRef, videoRef }) =>
 
     }, [ cameraRef.current, layoutRef.current ]);
 
+    // add fullscreen on f key press
+    useEffect(() =>
+    {
+        const handleKeyPress = (e) =>
+        {
+            if (e.key === 'f')
+            {
+                if (document.fullscreenElement)
+                {
+                    document.exitFullscreen();
+                } else
+                {
+                    document.documentElement.requestFullscreen();
+                }
+            }
+        }
+
+        document.addEventListener('keydown', handleKeyPress);
+
+        return () =>
+        {
+            document.removeEventListener('keydown', handleKeyPress);
+        }
+    }, []);
+
 
     return (
         <div
